@@ -6,3 +6,4 @@ def get_random_quote():
     if response.status_code == 200:
       quote = response.json()
       return quote
+    pass
