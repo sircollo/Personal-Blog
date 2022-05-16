@@ -1,10 +1,11 @@
-from flask import render_template,request,redirect,url_for
+from flask import render_template,request,redirect,url_for,flash
 from flask_login import login_required
 from . import main
-from ..models import Blog
+from ..models import Blog,Subscriber
 from ..requests import get_random_quote
 from ..models import Blog,Comment
-from .forms import CommentsForm
+from .forms import CommentsForm,SubscribeForm
+from ..email import mail_message
 
 @main.route('/')
 def index():
@@ -34,4 +35,16 @@ def comment(blog_id):
         new_comment.save_comment()
         return redirect(url_for('.comment',blog_id=blog_id))
     return render_template('comments.html', form =form, blog = blog,comments=comments)
-        
+
+@main.route('/subscribe',methods = ['POST','GET'])
+def subscribe():
+    subscribe_form = SubscribeForm()
+    if subscribe_form.validate_on_submit():
+        email = request.form.get('email')
+        username = request.form.get('username')
+        new_subscriber = Subscriber(email = email, username = username)
+        new_subscriber.save_subscriber()
+        mail_message("Hi, Thank you for subscribing","email/subscriber",new_subscriber.email,new_subscriber=new_subscriber)
+        flash('Thank you for your subscription')
+        return redirect(url_for('main.index'))
+    return render_template('subscribe.html',subscribe_form=subscribe_form)
