@@ -1,6 +1,6 @@
 from app import create_app,db
 from flask_script import Manager,Server
-from app.models import User,Blog,Comment
+from app.models import User,Blog,Comment,Subscriber
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_migrate import Migrate,MigrateCommand
@@ -17,6 +17,7 @@ admin = Admin(app)
 admin.add_view(ModelView(User,db.session))
 admin.add_view(ModelView(Blog,db.session))
 admin.add_view(ModelView(Comment,db.session))
+admin.add_view(ModelView(Subscriber,db.session))
 
 @manager.shell
 def make_shell():
