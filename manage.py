@@ -19,6 +19,12 @@ admin.add_view(ModelView(Blog,db.session))
 admin.add_view(ModelView(Comment,db.session))
 admin.add_view(ModelView(Subscriber,db.session))
 
+@manager.command
+def test():
+  import unittest
+  tests = unittest.TestLoader().discover('tests')
+  unittest.TextTestRunner(verbosity=2).run(tests)
+  
 @manager.shell
 def make_shell():
   return dict(app=app,db=db)
