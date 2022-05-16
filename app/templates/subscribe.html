@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+<div class="container">
+  <div class="form-area">
+  <form action="/subscribe" method="post">
+    {{subscribe_form.hidden_tag()}}
+    <div class="form-outline mb-4">
+    <label class="form-label" for="typeEmailX">Name</label>
+    {{subscribe_form.username(type="text" ,id="typeEmailX",class="form-control form-control-lg")}}
+    </div>
+    <div class="form-outline mb-4">
+      <label class="form-label" for="typeEmailX">Email</label>
+      {{subscribe_form.email(type="email" ,id="typeEmailX",class="form-control form-control-lg")}}
+      </div>
+      <div>
+        {{subscribe_form.submit(class="btn btn-outline-dark btn-lg px-5",type="submit")}}  
+      </div>
+  </form>
+</div>
+</div>
+{% endblock %}
