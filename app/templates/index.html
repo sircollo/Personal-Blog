@@ -1,1 +1,43 @@
-<h1>Cheers! Your are now set to go</h1>
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center mt-0">
+      <p>{{quote.quote}}
+      <strong><p>~ {{quote.author}}</p></strong>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+<div class="row">
+  
+  <div class="leftcolumn">
+    {% for blog in blog_list %}
+    <div class="card">
+      <h2>{{blog.title}}</h2>
+      <h5>{{blog.date_posted.strftime('%Y-%m-%d')}}</h5>
+      <p>{{blog.blog_post | truncate(100)}}<span><a href="">...Read More</a></span></p>
+      <div>
+        <a href="{{url_for('main.comment',blog_id=blog.id)}}"><button class="btn btn-dark">Comment</button></a>
+      </div>
+    </div>
+    {% endfor %}
+   
+  </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>Subscribe</h2>
+      <p><a href="">subscibe link</a> </p>
+    </div>
+    <div class="card">
+      <h3>Recent Blogs</h3>
+      {% for blog in blog_list %}
+      <p><a href="{{blog.description}}">{{blog.title}}</a></p><br>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
