@@ -3,9 +3,13 @@ from requests import session
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import datetime
+from . import login_manager
 
 
 
+@login_manager.user_loader
+def load_user(user_id):
+  return User.query.get(int(user_id))
 class User(db.Model,UserMixin):
   __tablename__='users'
   id = db.Column(db.Integer,primary_key = True)
@@ -29,7 +33,7 @@ class Blog(db.Model,UserMixin):
   id = db.Column(db.Integer,primary_key = True)
   title = db.Column(db.String(30))
   author = db.Column(db.String(25))
-  blog_post = db.Column(db.String(255))
+  blog_post = db.Column(db.String())
   date_posted = db.Column(db.DateTime,default=datetime.utcnow)
   comments = db.relationship('Comment',backref='blog',lazy='dynamic')
 
@@ -78,6 +82,7 @@ class Subscriber(db.Model):
     __tablename__='subscribers'
 
     id=db.Column(db.Integer,primary_key=True)
+    username = db.Column(db.String(20))
     email = db.Column(db.String(255),unique=True,index=True)
 
     def save_subscriber(self):
@@ -86,7 +91,7 @@ class Subscriber(db.Model):
 
     def __repr__(self):
         return f'Subscriber {self.email}'
+      
+
     
-    
-  
 
