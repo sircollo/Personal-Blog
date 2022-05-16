@@ -1,0 +1,28 @@
+body {
+  padding: 2rem 0rem;
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+.card-img {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.card-title {
+  margin-bottom: 0.3rem;
+}
+
+.cat {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.fa-users {
+  margin-left: 1rem;
+}
+
+.card-footer {
+  font-size: 0.8rem;
+}
