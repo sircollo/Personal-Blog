@@ -30,6 +30,7 @@ It also gives a writer database access to edit posts, remove posts through the a
 * install dependencies
 
 * To access admin panel use: /admin
+* To access admin login use : /login
 
 ### Running the Application
 * To run the application, open the cloned file in terminal and run the following command:
